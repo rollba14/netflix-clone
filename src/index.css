@@ -1,4 +1,8 @@
 @charset "UTF-8";
+body {
+  margin: 0;
+  padding: 0;
+}
 .App-header > header {
   padding: 0px 10px;
   background-color: #000;
@@ -6,5 +10,9 @@
 }
 .logo {
   width: 200px;
+  height: 100%;
+}
+.App-main {
+  padding-top: 85px;
   height: 100%;
 }
