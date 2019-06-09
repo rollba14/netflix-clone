@@ -2,8 +2,9 @@
 .App-header > header {
   padding: 0px 10px;
   background-color: #000;
+  height: 85px;
 }
 .logo {
-  width: 150px;
-  height: auto;
+  width: 200px;
+  height: 100%;
 }
