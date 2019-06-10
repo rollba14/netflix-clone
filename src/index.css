@@ -17,7 +17,7 @@ body {
   height: 100%;
 }
 .App-main .list-tile {
-  padding: 5px;
+  transition: 0.3s ease-out;
 }
 .App-main .list-wrapper {
   display: flex !important;

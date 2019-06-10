@@ -1,7 +1,7 @@
 import React, {Component}from 'react';
 import data from './data.js'
 import './style.styl'
-import {GridList, GridListTile, GridListTileBar, Icons, IconButton} from '../'
+import {GridList, GridListTile, GridListTileBar, Icons, Button, IconButton} from '../'
 
 class Main extends Component {
   constructor(props){
@@ -34,10 +34,12 @@ class Main extends Component {
             onMouseEnter={()=>{this.displayBtn(video.id)}}
             onMouseLeave={()=>{this.hideBtn()}}
             title={video.title}
+            className="list-tile"
             subtitle={
-              opened === video.id && <IconButton aria-label={`${video.title}`}>
-                <Icons.StarBorder/>
-              </IconButton>
+              opened === video.id &&
+              <Button color="secondary" variant="contained" size="small">
+                Remove
+              </Button>
             }
           >
           </GridListTileBar>
@@ -53,10 +55,12 @@ class Main extends Component {
             onMouseEnter={()=>{this.displayBtn(video.id)}}
             onMouseLeave={()=>{this.hideBtn()}}
             title={video.title}
+            className="list-tile"
             subtitle={
-              opened === video.id && <IconButton aria-label={`${video.title}`}>
-                <Icons.StarBorder/>
-              </IconButton>
+              opened === video.id &&
+              <Button color="primary" variant="contained" size="small">
+                Add
+              </Button>
             }
           >
           </GridListTileBar>
