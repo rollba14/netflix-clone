@@ -42,11 +42,12 @@ class Main extends Component {
     const {myList, recommendations, opened} = this.state
     const myListGrids = myList.map(video=>{
       return(
-        <GridListTile key={video.id}>
+        <GridListTile key={video.id}
+          onMouseOver={()=>{this.displayBtn(video.id)}}
+          onMouseLeave={()=>{this.hideBtn()}}
+        >
           <img src={video.img} alt={video.title} />
           <GridListTileBar
-            onMouseEnter={()=>{this.displayBtn(video.id)}}
-            onMouseLeave={()=>{this.hideBtn()}}
             title={video.title}
             className="list-tile"
             subtitle={
@@ -65,11 +66,12 @@ class Main extends Component {
 
     const recommendGrids = recommendations.map(video=>{
       return(
-        <GridListTile key={video.id}>
+        <GridListTile key={video.id}
+          onMouseOver={()=>{this.displayBtn(video.id)}}
+          onMouseLeave={()=>{this.hideBtn()}}
+        >
           <img src={video.img} alt={video.title} />
           <GridListTileBar
-            onMouseEnter={()=>{this.displayBtn(video.id)}}
-            onMouseLeave={()=>{this.hideBtn()}}
             title={video.title}
             className="list-tile"
             subtitle={
