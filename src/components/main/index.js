@@ -87,14 +87,14 @@ class Main extends Component {
             </GridList>
           </div>
         </div>
-        <div className="recommendation-list">
+        { recommendations.length !== 0 && <div className="recommendation-list">
           <h2>Recommendations</h2>
           <div>
             <GridList className="grid-list" cols={4}>
               {recommendGrids}
             </GridList>
           </div>
-        </div>
+        </div> }
       </main>
     )
   }
