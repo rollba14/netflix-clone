@@ -37,3 +37,10 @@ body {
 .App-main .hidden {
   visibility: hidden;
 }
+.App-main .paper {
+  margin-top: 20px;
+  padding: 20px;
+}
+.App-main .paper > div {
+  margin-right: 10px;
+}

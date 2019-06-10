@@ -1,7 +1,7 @@
 import React, {Component}from 'react';
 import data from './data.js'
 import './style.styl'
-import {GridList, GridListTile, GridListTileBar, Icons, Button, IconButton} from '../'
+import {GridList, GridListTile, GridListTileBar, Icons, Button, IconButton, Typography, Chip, Paper} from '../'
 
 class Main extends Component {
   constructor(props){
@@ -40,6 +40,9 @@ class Main extends Component {
 
   render(){
     const {myList, recommendations, opened} = this.state
+    const titleList = myList.map(item=>{
+      return (<Chip label={item.title} color="primary"/>)
+    })
     const myListGrids = myList.map(video=>{
       return(
         <GridListTile key={video.id}
@@ -110,6 +113,10 @@ class Main extends Component {
             </GridList>
           </div>
         </div> }
+        { myList.length !== 0 &&
+          <Paper className="paper">
+            {titleList}
+          </Paper> }
       </main>
     )
   }
