@@ -1,6 +1,8 @@
-## Hi
+# Hi
 
 This is an app to mock Netflix website with editable rows of titles using React & Redux.
 
-# Demo:
+This app uses mock end point located at http://www.mocky.io/v2/5cfdea7b320000520045eced to fetch the video data. Please allow running unsafe script to see the render;
+
+## Demo:
 https://brandonliao14.github.io/netflix-clone/
