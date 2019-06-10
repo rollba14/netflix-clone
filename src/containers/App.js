@@ -1,12 +1,11 @@
 import React from 'react';
-import {Header,Main,Footer} from '../components'
+import {Header,Main} from '../components'
 
 function App() {
   return (
     <div className="App">
       <Header/>
       <Main/>
-      <Footer/>
     </div>
   );
 }
