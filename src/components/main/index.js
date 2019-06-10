@@ -1,7 +1,8 @@
 import React, {Component}from 'react';
 import data from './data.js'
 import './style.styl'
-import {GridList, GridListTile, GridListTileBar, Icons, Button, IconButton, Typography, Chip, Paper} from '../'
+import {GridList, GridListTile, GridListTileBar, Icons, Button, IconButton, Typography, Chip, Paper, Actions} from '../'
+import {connect } from 'react-redux';
 
 class Main extends Component {
   constructor(props){
@@ -10,6 +11,15 @@ class Main extends Component {
       myList: data.myList,
       recommendations: data.recommendations,
       opened: null,
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if(this.props.videos !== prevProps.videos){
+      console.log(this.props)
+      this.setState({
+        myList:[...this.props.videos.recommendations]
+      })
     }
   }
 
@@ -122,4 +132,17 @@ class Main extends Component {
   }
 }
 
-export default Main;
+const mapStateToProps = (state,ownProps) => {
+  console.log('state is ', state);
+  return {
+    videos:state.videos
+  }
+}
+
+const mapDispatchToProps = (dispatch)=> {
+  return {
+    fetchVideos: Actions.fetchVideos
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

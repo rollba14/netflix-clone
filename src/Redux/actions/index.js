@@ -5,19 +5,26 @@ export const ActionType = {
   POPULATE_VIDEOS: "POPULATE_VIDEOS",
 };
 
-export const fetchVideos = () => async dispatch {
-  try{
-    // A mock url endpoint with data provided as response
-    const url= "http://www.mocky.io/v2/5cfc97623200006f00ccd3cc";
-    const response = await fetch(url)
-    const responseBody = await response.json();
-    dispatch(populateVideos(responseBody));
-  } catch (error){
-    console.error(error);
-  }
-}
+export const fetchVideos= ()=>{
+  return function (dispatch,getState){
+    try{
+      // A mock url endpoint with data provided as response
+      const url= "http://www.mocky.io/v2/5cfc97623200006f00ccd3cc";
+      fetch(url)
+      .then(response=>{
+        return response.json()
+      }).then(responseBody=>{
+        dispatch(populateVideos(responseBody));
+      })
+    } catch (error){
+      console.error(error);
+    }
+  };
+};
 
-export const populateVideos = videos => {
-  type: ActionType.POPULATE_VIDEOS,
-  videos
-}
+export const populateVideos = (videos) => {
+  return {
+    type: ActionType.POPULATE_VIDEOS,
+    videos
+  }
+};
