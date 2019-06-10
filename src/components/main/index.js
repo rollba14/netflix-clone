@@ -25,6 +25,13 @@ class Main extends Component {
     })
   }
 
+  addRecommendation=(video)=>{
+    this.setState({
+      myList: [...this.state.myList, video],
+      recommendations: this.state.recommendations.filter(rec=>{return rec.id !==video.id})
+    })
+  }
+
   render(){
     const {myList, recommendations, opened} = this.state
     const myListGrids = myList.map(video=>{
@@ -59,7 +66,9 @@ class Main extends Component {
             className="list-tile"
             subtitle={
               opened === video.id &&
-              <Button color="primary" variant="contained" size="small">
+              <Button color="primary" variant="contained" size="small"
+               onClick={()=>{this.addRecommendation(video)}}
+              >
                 Add
               </Button>
             }
