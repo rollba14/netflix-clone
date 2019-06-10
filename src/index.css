@@ -16,3 +16,19 @@ body {
   padding-top: 85px;
   height: 100%;
 }
+.App-main .list-tile {
+  padding: 5px;
+}
+.App-main .list-wrapper {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: space-around !important;
+  overflow: hidden !important;
+}
+.App-main .grid-list {
+  flex-wrap: nowrap !important;
+  transform: translateZ(0) !important;
+}
+.App-main .hidden {
+  visibility: hidden;
+}
