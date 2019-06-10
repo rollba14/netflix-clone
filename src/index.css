@@ -37,7 +37,7 @@ body {
   transform: translateZ(0) !important;
 }
 .App-main .hidden {
-  visibility: hidden;
+  display: none;
 }
 .App-main .paper {
   margin-top: 20px;

@@ -1,5 +1,4 @@
 import React, {Component}from 'react';
-import data from './data.js'
 import './style.styl'
 import {GridList, GridListTile, GridListTileBar, Icons, Button, IconButton, Typography, Chip, Paper, Actions, CircularProgress} from '../'
 import {connect } from 'react-redux';
@@ -7,32 +6,6 @@ import {connect } from 'react-redux';
 class Main extends Component {
   constructor(props){
     super(props)
-    this.state={
-      myList: data.myList,
-      recommendations: data.recommendations,
-      opened: null,
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    if(this.props.videos !== prevProps.videos){
-      console.log(this.props)
-      this.setState({
-        myList:[...this.props.videos.recommendations]
-      })
-    }
-  }
-
-  displayBtn=(id)=>{
-    this.setState({
-      opened: id
-    })
-  }
-
-  hideBtn=()=>{
-    this.setState({
-      opened: null
-    })
   }
 
   removeFromMyList=(id)=>{
@@ -52,23 +25,23 @@ class Main extends Component {
     let content;
     if(Object.keys(this.props.videos).length !== 0){
       const {myList, recommendations} = this.props.videos
-      const {opened} = true
       const titleList = myList.map(item=>{
         return (<Chip label={item.title} color="primary"/>)
       })
       const myListGrids = myList.map(video=>{
         return(
           <GridListTile key={video.id}
-            onMouseOver={()=>{this.displayBtn(video.id)}}
-            onMouseLeave={()=>{this.hideBtn()}}
+            onMouseOver={this.props.displayBtn.bind(this,video.id)}
+            onMouseLeave={this.props.hideBtn.bind(this,video.id)}
           >
             <img src={video.img} alt={video.title} />
             <GridListTileBar
               title={video.title}
               className="list-tile"
               subtitle={
-                opened === video.id &&
-                <Button color="secondary" variant="contained" size="small"
+                <Button className={
+                  this.props.opened==video.id? "": "hidden"}
+                 color="secondary" variant="contained" size="small"
                  onClick={()=>{this.removeFromMyList(video.id)}}
                 >
                   Remove
@@ -83,16 +56,17 @@ class Main extends Component {
       const recommendGrids = recommendations.map(video=>{
         return(
           <GridListTile key={video.id}
-            onMouseOver={()=>{this.displayBtn(video.id)}}
-            onMouseLeave={()=>{this.hideBtn()}}
+            onMouseOver={()=>{this.props.displayBtn(video.id)}}
+            onMouseLeave={()=>{this.props.hideBtn(video.id)}}
           >
             <img src={video.img} alt={video.title} />
             <GridListTileBar
               title={video.title}
               className="list-tile"
               subtitle={
-                opened === video.id &&
-                <Button color="primary" variant="contained" size="small"
+                <Button className={
+                  this.props.opened==video.id? "": "hidden"}
+                 color="primary" variant="contained" size="small"
                  onClick={()=>{this.addRecommendation(video)}}
                 >
                   Add
@@ -153,15 +127,20 @@ class Main extends Component {
 }
 
 const mapStateToProps = (state,ownProps) => {
-  console.log('state is ', state);
   return {
-    videos:state.videos
+    videos:state.videos.videos,
+    opened:state.videos.opened
   }
 }
 
 const mapDispatchToProps = (dispatch)=> {
   return {
-    fetchVideos: Actions.fetchVideos
+    displayBtn: (id)=>{
+      dispatch(Actions.displayBtn(id))
+    },
+    hideBtn: (id)=>{
+      dispatch(Actions.hideBtn(id))
+    }
   }
 };
 
