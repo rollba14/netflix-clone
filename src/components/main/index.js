@@ -7,7 +7,8 @@ class Main extends Component {
   constructor(props){
     super(props)
     this.state={
-      videos: data,
+      myList: data.myList,
+      recommendations: data.recommendations,
       opened: null,
     }
   }
@@ -25,8 +26,8 @@ class Main extends Component {
   }
 
   render(){
-    const {videos, opened} = this.state
-    const myListGrids = videos.myList.map(video=>{
+    const {myList, recommendations, opened} = this.state
+    const myListGrids = myList.map(video=>{
       return(
         <GridListTile key={video.id}>
           <img src={video.img} alt={video.title} />
@@ -47,7 +48,7 @@ class Main extends Component {
       )
     })
 
-    const recommendGrids = videos.recommendations.map(video=>{
+    const recommendGrids = recommendations.map(video=>{
       return(
         <GridListTile key={video.id}>
           <img src={video.img} alt={video.title} />
