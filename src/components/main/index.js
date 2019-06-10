@@ -25,6 +25,12 @@ class Main extends Component {
     })
   }
 
+  removeFromMyList=(id)=>{
+    this.setState({
+      myList: this.state.myList.filter(item=>{return item.id !== id})
+    })
+  }
+
   addRecommendation=(video)=>{
     this.setState({
       myList: [...this.state.myList, video],
@@ -45,7 +51,9 @@ class Main extends Component {
             className="list-tile"
             subtitle={
               opened === video.id &&
-              <Button color="secondary" variant="contained" size="small">
+              <Button color="secondary" variant="contained" size="small"
+               onClick={()=>{this.removeFromMyList(video.id)}}
+              >
                 Remove
               </Button>
             }
