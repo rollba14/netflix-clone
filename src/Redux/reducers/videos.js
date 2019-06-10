@@ -22,6 +22,9 @@ const videos = (state=initState, action)=>{
         ...state,
         opened: false
       };
+    /*
+      Ideally the below actions should also send a post request to the server and update the myList property in the database model, but since the end point is a mockup, there's no control over that but only to update the client side view.
+    */
     case ActionType.REMOVE_FROM_MY_LIST:
       return{
         ...state,
