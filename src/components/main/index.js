@@ -89,11 +89,16 @@ class Main extends Component {
       <main className="App-main">
         <div className="main-list">
           <h2>My List</h2>
-          <div>
-            <GridList className="grid-list" cols={4}>
-              {myListGrids}
-            </GridList>
-          </div>
+          { myList.length > 0 ?
+            <div>
+              <GridList className="grid-list" cols={4}>
+                {myListGrids}
+              </GridList>
+            </div> :
+            <div>
+              You haven't added any titles to your list yet.
+            </div>
+          }
         </div>
         { recommendations.length !== 0 && <div className="recommendation-list">
           <h2>Recommendations</h2>
