@@ -32,3 +32,30 @@ export const populateVideos = (videos) => {
     videos
   }
 };
+
+export const displayBtn = (id)=>{
+  return {
+    type: ActionType.DISPLAY_BTN,
+    id
+  }
+}
+
+export const hideBtn = () =>{
+  return{
+    type: ActionType.HIDE_BTN
+  }
+}
+
+export const removeFromMyList = (id)=>{
+  return {
+    type: ActionType.REMOVE_FROM_MY_LIST,
+    id
+  }
+}
+
+export const addRecommendation = (video)=>{
+  return {
+    type: ActionType.ADD_RECOMMENDATION,
+    video
+  }
+}
