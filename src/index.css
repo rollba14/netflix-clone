@@ -41,7 +41,7 @@ body {
 }
 .App-main .paper {
   margin-top: 20px;
-  padding: 20px;
+  padding: 20px 0;
 }
 .App-main .paper > div {
   margin-right: 10px;

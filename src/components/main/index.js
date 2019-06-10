@@ -13,7 +13,7 @@ class Main extends Component {
     if(Object.keys(this.props.videos).length !== 0){
       const {myList, recommendations} = this.props.videos
       const titleList = myList.map(item=>{
-        return (<Chip label={item.title} color="primary"/>)
+        return (<Chip key={item.id} label={item.title} color="primary"/>)
       })
       const myListGrids = myList.map(video=>{
         return(
@@ -88,10 +88,10 @@ class Main extends Component {
               </GridList>
             </div>
           </div>: null }
-        { myList.length !== 0 ?
-          <Paper className="paper">
+        { myList.length !== 0 &&
+          <div className="paper">
             {titleList}
-          </Paper> : null}
+          </div>}
         </div>
       )
     } else{
