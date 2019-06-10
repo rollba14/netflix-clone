@@ -22,6 +22,23 @@ const videos = (state=initState, action)=>{
         ...state,
         opened: false
       };
+    case ActionType.REMOVE_FROM_MY_LIST:
+      return{
+        ...state,
+        videos:{
+          ...state.videos,
+          myList: state.videos.myList.filter(item=>{return item.id !== action.id})
+        },
+      };
+    case ActionType.ADD_RECOMMENDATION:
+      return{
+        ...state,
+        videos:{
+          ...state.videos,
+          myList: [...state.videos.myList, action.video],
+          recommendations: state.videos.recommendations.filter(rec=>{return rec.id !==action.video.id})
+        },
+      };
     default:
       return state;
   }

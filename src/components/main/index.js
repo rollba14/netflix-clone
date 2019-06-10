@@ -8,19 +8,6 @@ class Main extends Component {
     super(props)
   }
 
-  removeFromMyList=(id)=>{
-    this.setState({
-      myList: this.state.myList.filter(item=>{return item.id !== id})
-    })
-  }
-
-  addRecommendation=(video)=>{
-    this.setState({
-      myList: [...this.state.myList, video],
-      recommendations: this.state.recommendations.filter(rec=>{return rec.id !==video.id})
-    })
-  }
-
   render(){
     let content;
     if(Object.keys(this.props.videos).length !== 0){
@@ -31,8 +18,8 @@ class Main extends Component {
       const myListGrids = myList.map(video=>{
         return(
           <GridListTile key={video.id}
-            onMouseOver={this.props.displayBtn.bind(this,video.id)}
-            onMouseLeave={this.props.hideBtn.bind(this,video.id)}
+            onMouseOver={()=>{this.props.displayBtn(video.id)}}
+            onMouseLeave={()=>{this.props.hideBtn(video.id)}}
           >
             <img src={video.img} alt={video.title} />
             <GridListTileBar
@@ -42,7 +29,7 @@ class Main extends Component {
                 <Button className={
                   this.props.opened==video.id? "": "hidden"}
                  color="secondary" variant="contained" size="small"
-                 onClick={()=>{this.removeFromMyList(video.id)}}
+                 onClick={()=>{this.props.removeFromMyList(video.id)}}
                 >
                   Remove
                 </Button>
@@ -67,7 +54,7 @@ class Main extends Component {
                 <Button className={
                   this.props.opened==video.id? "": "hidden"}
                  color="primary" variant="contained" size="small"
-                 onClick={()=>{this.addRecommendation(video)}}
+                 onClick={()=>{this.props.addRecommendation(video)}}
                 >
                   Add
                 </Button>
@@ -140,6 +127,12 @@ const mapDispatchToProps = (dispatch)=> {
     },
     hideBtn: (id)=>{
       dispatch(Actions.hideBtn(id))
+    },
+    removeFromMyList: (id)=>{
+      dispatch(Actions.removeFromMyList(id))
+    },
+    addRecommendation: (video)=>{
+      dispatch(Actions.addRecommendation(video))
     }
   }
 };
