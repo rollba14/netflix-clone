@@ -3,6 +3,10 @@ import thunk from 'redux-thunk'
 export const ActionType = {
   FETCH_VIDEOS: "FETCH_VIDEOS",
   POPULATE_VIDEOS: "POPULATE_VIDEOS",
+  DISPLAY_BTN: "DISPLAY_BTN",
+  HIDE_BTN: "HIDE_BTN",
+  REMOVE_FROM_MY_LIST: "REMOVE_FROM_MY_LIST",
+  ADD_RECOMMENDATION: "ADD_RECOMMENDATION",
 };
 
 export const fetchVideos= ()=>{
