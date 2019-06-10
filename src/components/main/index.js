@@ -1,7 +1,7 @@
 import React, {Component}from 'react';
 import data from './data.js'
 import './style.styl'
-import {GridList, GridListTile, GridListTileBar, Icons, Button, IconButton, Typography, Chip, Paper, Actions} from '../'
+import {GridList, GridListTile, GridListTileBar, Icons, Button, IconButton, Typography, Chip, Paper, Actions, CircularProgress} from '../'
 import {connect } from 'react-redux';
 
 class Main extends Component {
@@ -49,59 +49,62 @@ class Main extends Component {
   }
 
   render(){
-    const {myList, recommendations, opened} = this.state
-    const titleList = myList.map(item=>{
-      return (<Chip label={item.title} color="primary"/>)
-    })
-    const myListGrids = myList.map(video=>{
-      return(
-        <GridListTile key={video.id}
-          onMouseOver={()=>{this.displayBtn(video.id)}}
-          onMouseLeave={()=>{this.hideBtn()}}
-        >
-          <img src={video.img} alt={video.title} />
-          <GridListTileBar
-            title={video.title}
-            className="list-tile"
-            subtitle={
-              opened === video.id &&
-              <Button color="secondary" variant="contained" size="small"
-               onClick={()=>{this.removeFromMyList(video.id)}}
-              >
-                Remove
-              </Button>
-            }
+    let content;
+    if(Object.keys(this.props.videos).length !== 0){
+      const {myList, recommendations} = this.props.videos
+      const {opened} = true
+      const titleList = myList.map(item=>{
+        return (<Chip label={item.title} color="primary"/>)
+      })
+      const myListGrids = myList.map(video=>{
+        return(
+          <GridListTile key={video.id}
+            onMouseOver={()=>{this.displayBtn(video.id)}}
+            onMouseLeave={()=>{this.hideBtn()}}
           >
-          </GridListTileBar>
-        </GridListTile>
-      )
-    })
+            <img src={video.img} alt={video.title} />
+            <GridListTileBar
+              title={video.title}
+              className="list-tile"
+              subtitle={
+                opened === video.id &&
+                <Button color="secondary" variant="contained" size="small"
+                 onClick={()=>{this.removeFromMyList(video.id)}}
+                >
+                  Remove
+                </Button>
+              }
+            >
+            </GridListTileBar>
+          </GridListTile>
+        )
+      })
 
-    const recommendGrids = recommendations.map(video=>{
-      return(
-        <GridListTile key={video.id}
-          onMouseOver={()=>{this.displayBtn(video.id)}}
-          onMouseLeave={()=>{this.hideBtn()}}
-        >
-          <img src={video.img} alt={video.title} />
-          <GridListTileBar
-            title={video.title}
-            className="list-tile"
-            subtitle={
-              opened === video.id &&
-              <Button color="primary" variant="contained" size="small"
-               onClick={()=>{this.addRecommendation(video)}}
-              >
-                Add
-              </Button>
-            }
+      const recommendGrids = recommendations.map(video=>{
+        return(
+          <GridListTile key={video.id}
+            onMouseOver={()=>{this.displayBtn(video.id)}}
+            onMouseLeave={()=>{this.hideBtn()}}
           >
-          </GridListTileBar>
-        </GridListTile>
-      )
-    });
-    return (
-      <main className="App-main">
+            <img src={video.img} alt={video.title} />
+            <GridListTileBar
+              title={video.title}
+              className="list-tile"
+              subtitle={
+                opened === video.id &&
+                <Button color="primary" variant="contained" size="small"
+                 onClick={()=>{this.addRecommendation(video)}}
+                >
+                  Add
+                </Button>
+              }
+            >
+            </GridListTileBar>
+          </GridListTile>
+        )
+      });
+      content = (
+        <div>
         <div className="main-list">
           <h2>My List</h2>
           { myList.length > 0 ?
@@ -115,18 +118,35 @@ class Main extends Component {
             </div>
           }
         </div>
-        { recommendations.length !== 0 && <div className="recommendation-list">
-          <h2>Recommendations</h2>
-          <div>
-            <GridList className="grid-list" cols={4}>
-              {recommendGrids}
-            </GridList>
-          </div>
-        </div> }
-        { myList.length !== 0 &&
+        { recommendations.length !==0 ?
+          <div className="recommendation-list">
+            <h2>Recommendations</h2>
+            <div>
+              <GridList className="grid-list" cols={4}>
+                {recommendGrids}
+              </GridList>
+            </div>
+          </div>: null }
+        { myList.length !== 0 ?
           <Paper className="paper">
             {titleList}
-          </Paper> }
+          </Paper> : null}
+        </div>
+      )
+    } else{
+      content = (
+        <div className="spinner">
+          <CircularProgress
+            color="primary"
+            size={100}
+            thickness={3.6}
+          />
+        </div>
+      )
+    }
+    return (
+      <main className="App-main">
+        {content}
       </main>
     )
   }

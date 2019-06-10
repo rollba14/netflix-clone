@@ -20,6 +20,7 @@ body {
   padding-left: 15px;
   padding-right: 15px;
   height: 100%;
+  min-height: 80vh;
 }
 .App-main .list-tile {
   transition: 0.3s ease-out;
@@ -27,6 +28,7 @@ body {
 .App-main .list-wrapper {
   display: flex !important;
   flex-wrap: wrap !important;
+  align-items: center;
   justify-content: space-around !important;
   overflow: hidden !important;
 }
@@ -43,4 +45,10 @@ body {
 }
 .App-main .paper > div {
   margin-right: 10px;
+}
+.App-main .spinner {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(40vw, 40vh);
 }

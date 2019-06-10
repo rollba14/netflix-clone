@@ -9,7 +9,7 @@ export const fetchVideos= ()=>{
   return function (dispatch,getState){
     try{
       // A mock url endpoint with data provided as response
-      const url= "http://www.mocky.io/v2/5cfc97623200006f00ccd3cc";
+      const url= "http://www.mocky.io/v2/5cfdea7b320000520045eced";
       fetch(url)
       .then(response=>{
         return response.json()
